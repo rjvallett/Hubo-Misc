@@ -127,12 +127,17 @@ ref = ha.HUBO_REF()
 [statuss, framesizes] = s.get(state, wait=False, last=False)
 
 #Set Left Elbow Bend (LEB) and Right Shoulder Pitch (RSP) to  -0.2 rad and 0.1 rad respectively
-ref.ref[ha.LEB] = 0.0
-ref.ref[ha.RSP] = 0.0
-ref.ref[ha.RKN] = 0.0
-ref.ref[ha.RAP] = 0.0
-ref.ref[ha.LKN] = 0.0
-ref.ref[ha.RAP] = 0.0
+for i in range(ha.HUBO_JOINT_COUNT):
+  ref.ref[i] = state.joint[i].pos
+
+LAP = state.joint[ha.LAP].pos
+LKN = state.joint[ha.LKN].pos
+#ref.ref[ha.LEB] = 0.0
+#ref.ref[ha.RSP] = 0.0
+#ref.ref[ha.RKN] = 0.0
+#ref.ref[ha.RAP] = 0.0
+#ref.ref[ha.LKN] = 0.0
+#ref.ref[ha.RAP] = 0.0
 
 r.put(ref)
 
